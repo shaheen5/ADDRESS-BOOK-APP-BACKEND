@@ -1,0 +1,27 @@
+{
+  "name": "address-book-app-backend",
+  "version": "1.0.0",
+  "description": "AddressBook App Backend Using Express,MondoDB,NodeJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaheen5/ADDRESS-BOOK-APP-BACKEND.git"
+  },
+  "keywords": [
+    "Express",
+    "MongoDB",
+    "RESTAPIs",
+    "Mongoose",
+    "Node",
+    "AddressBook"
+  ],
+  "author": "Shaheen M.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaheen5/ADDRESS-BOOK-APP-BACKEND/issues"
+  },
+  "homepage": "https://github.com/shaheen5/ADDRESS-BOOK-APP-BACKEND#readme"
+}
