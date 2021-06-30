@@ -14,12 +14,8 @@
  * @since       : 29-06-2021
  **********************************************************************************************************/
 module.exports = (app) => {
-    const user = require('../controllers/users');
+    const user = require('../controllers/user');
 
     // Create a new user
     app.post('/registerUser', user.registerUser);
-
-    // login user
-    app.post('/login', user.userLogin);
-
 }

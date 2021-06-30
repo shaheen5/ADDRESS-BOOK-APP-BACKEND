@@ -11,7 +11,7 @@
  * @module      :  connects to db,logs appropriate message to log files 
  * @author      : Shaheen M.
  * @version     : 1.0
- * @since       : 15-06-2021
+ * @since       : 29-06-2021
  **********************************************************************************************************/
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -20,7 +20,8 @@ module.exports = () => {
     // Connecting to the database
     mongoose.connect(process.env.URL, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
     }).then(() => {
         console.log("Successfully connected to the database");
     }).catch(err => {

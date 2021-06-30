@@ -31,7 +31,7 @@ const dbConnect = require('./config/database');
 dbConnect();
 
 // Require routes
-require('./app/routes/routes.js')(app);
+require('./app/routes/routes')(app);
 
 //define a simple route
 app.get('/',(req,res)=>{
