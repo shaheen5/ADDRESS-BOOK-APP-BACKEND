@@ -25,7 +25,7 @@ class UserController {
         */
     registerUser = (req, res) => {
         try {
-            //validate re body
+            //validate request body
             let validationResult = userValidator.validate(req.body);
             if (validationResult.error) {
                 return res.status(400).send({
@@ -50,6 +50,34 @@ class UserController {
 
         } catch (error) {
             return res.send({ message: error.message })
+        }
+    }
+    /**
+    * To login user  and authenticate
+    * @param {*} req (express property)
+    * @param {*} res (express property)
+    */
+    userLogin = (req, res) => {
+        try {
+            //check whether request body contains only email and password as input
+            if (Object.keys(req.body).length != 2) {
+                return res.status(400).send({ success: false, message: "Invalid Input!" });
+            }
+            //check password is not empty
+            if (!req.body.password) {
+                return res.status(400).send({ success: false, message: "Password cannot be empty!" });
+            }
+            const loginDetails = ({
+                emailId: req.body.emailId,
+                password: req.body.password,
+            });
+
+            userService.userLogin(loginDetails, (err, data) => {
+                return err ? res.status(404).send({ success: false, message: err })
+                    : res.status(200).send({ success: true, message: "User Login Successful", data: data });
+            });
+        } catch (error) {
+            return res.send({ message: error.message });
         }
     }
 }

@@ -32,5 +32,20 @@ class UserService {
             return callback(error, null);
         }
     }
+    /**
+      * login user details
+      * @param {*} req (express property)
+      * @param {*} res (express property)
+      * @returns callback
+      */
+    userLogin = (loginDetails, callback) => {
+        try {
+            userModel.userLogin(loginDetails, (err, data) => {
+                return err ? callback(err,data) : callback(null,data);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
 }
 module.exports = new UserService();

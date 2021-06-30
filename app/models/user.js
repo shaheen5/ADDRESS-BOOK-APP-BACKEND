@@ -64,5 +64,21 @@ class UserRegistrationAndLogin {
             return (error, null);
         }
     }
+    /**
+        * @description Get the user data by emailID
+        * @param loginDetails having emailId and password
+        * @return callback is used to callback Services with data or error message
+        */
+    userLogin = (loginDetails, callback) => {
+        try {
+            User.findOne({ emailId: loginDetails.emailId }, (err, data) => {
+                if (err) return callback(err, null);
+                if (!data) return callback('User Not Found', null);
+                return callback(null, data);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
 }
 module.exports = new UserRegistrationAndLogin();
