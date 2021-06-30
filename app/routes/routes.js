@@ -24,4 +24,7 @@ module.exports = (app) => {
 
     //add new contact in addressbook
     app.post('/addressbook/addContact', addressBook.createNewContact);
+
+    //get all contacts in addressbook
+    app.get('/addressbook/getContacts',addressBook.getAllContacts);
 }

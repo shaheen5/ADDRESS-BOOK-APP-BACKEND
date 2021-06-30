@@ -87,5 +87,19 @@ class AddressBookOperations {
             return callback(error, null);
         }
     }
+    /**
+        * @description retrive all the addressBook Data from database
+        * @param callback is data sent from Service layer
+        * @return callback is used to callback Services with data or error message
+        */
+    findAllContacts = (callback) => {
+        try {
+            AddressBook.find((error, addressBookData) => {
+                return (error) ? callback(error, null) : callback(null, addressBookData);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
 }
 module.exports = new AddressBookOperations();

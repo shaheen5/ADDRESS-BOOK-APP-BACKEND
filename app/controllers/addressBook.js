@@ -58,5 +58,37 @@ class AddressBookController {
             });
         }
     }
+    /**
+   * function to call the findAllContacts function of service layer which retrives data from db
+   * @param {*} req (express property)
+   * @param {*} res (express property)
+   * @returns HTTP status and object
+   */
+    getAllContacts = (req, res) => {
+        try {
+            addressBookService.findAllContacts((error, contacts) => {
+                if (error) {
+                    return res.status(500).send({
+                        success: false,
+                        message: error.message || "Some error occurred while retrieving contacts."
+                    });
+                }
+                if (!contacts) {
+                    return res.status(404).send("There are no contacts created yet!");
+                }
+                res.status(200).send({
+                    success: true,
+                    data: contacts,
+                    message: "Successfully Retrieved All contacts !"
+                });
+            });
+        } catch (error) {
+            return res.status(500).send({
+                success: false,
+                message: error.message
+            });
+        }
+    };
+
 }
 module.exports = new AddressBookController();

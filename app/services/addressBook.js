@@ -31,5 +31,18 @@ class AddressBookService {
             return callback(error, null);
         }
     }
+    /**
+  * /retrieve and return all contacts from the database.
+  * @param {*} callback callback function
+  */
+    findAllContacts = (callback) => {
+        try {
+            addressBookModel.findAllContacts((error, addressBookData) => {
+                return (error) ? callback(error, null) : callback(null, addressBookData);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    };
 }
 module.exports = new AddressBookService();
