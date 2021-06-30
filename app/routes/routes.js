@@ -18,4 +18,5 @@ module.exports = (app) => {
 
     // Create a new user
     app.post('/registerUser', user.registerUser);
+
 }
