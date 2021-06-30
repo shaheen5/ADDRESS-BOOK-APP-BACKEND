@@ -29,7 +29,7 @@ const addressBookSchema = mongoose.Schema({
     address: {
         type: String,
         required: true,
-        validate: /^[a-zA-Z0-9-,/_:]{3,50}$/
+        validate: /^[a-zA-Z0-9-,/_: ]{3,50}$/
     },
     city: {
         type: String,
@@ -49,7 +49,7 @@ const addressBookSchema = mongoose.Schema({
     phoneNumber: {
         type: Number,
         required: true,
-        validate: /^[a-zA-Z]{3,20}$/
+        validate: /^[6-9]{1}[0-9]{9}$/
     },
     emailId: {
         type: String,
@@ -60,4 +60,32 @@ const addressBookSchema = mongoose.Schema({
     timestamps: true
 });
 
-const AddressBook = mongoose.model('AddressBook',addressBookSchema);
+const AddressBook = mongoose.model('AddressBook', addressBookSchema);
+
+class AddressBookOperations {
+    /**
+        * @description addNewContactInbook method is to save the new Contact Data
+        * @param addressBookData is data sent from Services layer
+        * @return callback is used to callback Services includes error message or data
+            */
+    addNewContactInBook = (addressBookData, callback) => {
+        try {
+            const contact = new AddressBook({
+                firstName: addressBookData.firstName,
+                lastName: addressBookData.lastName,
+                address: addressBookData.address,
+                city: addressBookData.city,
+                state: addressBookData.state,
+                zipCode: addressBookData.zipCode,
+                phoneNumber: addressBookData.phoneNumber,
+                emailId: addressBookData.emailId
+            });
+            contact.save((error, addressBookData) => {
+                return (error) ? callback(error, null) : callback(null, addressBookData);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
+}
+module.exports = new AddressBookOperations();

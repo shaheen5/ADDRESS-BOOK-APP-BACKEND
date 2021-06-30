@@ -13,12 +13,15 @@
  * @version     : 1.0
  * @since       : 29-06-2021
  **********************************************************************************************************/
+const user = require('../controllers/user');
+const addressBook = require('../controllers/addressBook');
 module.exports = (app) => {
-    const user = require('../controllers/user');
-
     // Create a new user
     app.post('/registerUser', user.registerUser);
 
     // login user
     app.post('/login', user.userLogin);
+
+    //add new contact in addressbook
+    app.post('/addressbook/addContact', addressBook.createNewContact);
 }

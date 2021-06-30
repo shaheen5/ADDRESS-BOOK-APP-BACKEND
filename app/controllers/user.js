@@ -8,7 +8,7 @@
  *
  * @file        : controllers/user.js
  * @overview    : Handles requests coming from clients to login & register 
- * @module      : neccessary part (controller) of MVC Model of employee Payroll API
+ * @module      : neccessary part (controller) of MVC Model of AddressBook API
  * @author      : Shaheen M.
  * @version     : 1.0
  * @since       : 29-06-2021
