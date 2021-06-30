@@ -46,8 +46,8 @@ class AddressBookService {
     };
 
     /**
-   * find a single employee with a employeeId
-   * @param {*} employeeId path to the employee object
+   * find a single employee with a contactId
+   * @param {*} contactId path to the employee object
    * @param {*} callback callback function
    * @returns callback, object
    */
@@ -55,6 +55,22 @@ class AddressBookService {
         try {
             addressBookModel.findContactById(contactId, (error, addressBookData) => {
                 return (error) ? callback(error, null) : callback(null, addressBookData);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
+    /**
+  * deletes addressbook data with id
+  * @param {*} contactId path to the object
+  * @param {*} callback callback function
+  * @returns 
+  */
+    removecontactById = (contactId, callback) => {
+        try {
+            addressBookModel.removeContactById(contactId, (error, message) => {
+                if (error) return callback(error, { "message": "Contact could not be deleted" });
+                else return callback(null, { "message": "Contact was deleted successfully" });
             });
         } catch (error) {
             return callback(error, null);

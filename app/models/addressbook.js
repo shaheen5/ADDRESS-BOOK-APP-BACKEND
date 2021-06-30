@@ -115,5 +115,20 @@ class AddressBookOperations {
             return callback(error, null);
         }
     }
+    /**
+        * @description delete the addressBook Data from database
+        * @param contactId, callback is data sent from services layer
+        * @return callback is used to callback Services with or without error message
+        */
+    removeContactById = (contactId, callback) => {
+        try {
+            AddressBook.findOneAndDelete(contactId, (error, message) => {
+                if (error) return callback(error, { "message": error.message });
+                else return callback(null, { "message": "Contact was deleted successfully" });
+            });
+        } catch (error) {
+            return callback(error, "Some error occurred!");
+        }
+    }
 }
 module.exports = new AddressBookOperations();

@@ -128,5 +128,32 @@ class AddressBookController {
             return res.send({ message: error.message });
         }
     };
+    /**
+    * function to call the deleteEmployee function of service layer that deletes
+    *  the required employee data from the db 
+    * @param {*} req (express property)
+    * @param {*} res (express property)
+    * @returns HTTP status and object
+    */
+    removeContactFromAddressbook = (req, res) => {
+        try {
+            addressBookService.removecontactById(req.params.contactId, (error, message) => {
+                if (error) {
+                    return res.status(500).send({
+                        success: false,
+                        message: "Error deleting contact with id "
+                    });
+                }
+                res.status(200).send({
+                    success: true,
+                    message: message
+                });
+            });
+        } catch (error) {
+            return res.send({
+                message: error.message
+            });
+        }
+    };
 }
 module.exports = new AddressBookController();

@@ -30,4 +30,7 @@ module.exports = (app) => {
 
     //get one contact by id
     app.get('/addressbook/getContact/:contactId', addressBook.findContactById);
+
+    //delete contact by id
+    app.delete('/addressbook/deleteContact/:contactId', addressBook.removeContactFromAddressbook);
 }
