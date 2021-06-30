@@ -11,7 +11,7 @@
  * @module      : starting point to run the AddressBook API
  * @author      : Shaheen M.
  * @version     : 1.0
- * @since       : 15-06-2021
+ * @since       : 29-06-2021
  **********************************************************************************************************/
 
 const express = require('express');
@@ -29,6 +29,9 @@ app.use(express.json());
 // Configuring the database
 const dbConnect = require('./config/database');
 dbConnect();
+
+// Require routes
+require('./app/routes/routes.js')(app);
 
 //define a simple route
 app.get('/',(req,res)=>{
