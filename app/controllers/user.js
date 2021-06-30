@@ -15,6 +15,7 @@
  **********************************************************************************************************/
 const userService = require('../services/user');
 const userValidator = require('../middlewares/userValidation');
+const loginValidator = require('../middlewares/userCredentialsValidation');
 
 class UserController {
     /**
@@ -63,9 +64,13 @@ class UserController {
             if (Object.keys(req.body).length != 2) {
                 return res.status(400).send({ success: false, message: "Invalid Input!" });
             }
-            //check password is not empty
-            if (!req.body.password) {
-                return res.status(400).send({ success: false, message: "Password cannot be empty!" });
+            //validate request body
+            let validationResult = loginValidator.validate(req.body);
+            if (validationResult.error) {
+                return res.status(400).send({
+                    success: false,
+                    message: validationResult.error.details[0].message
+                });
             }
             const loginDetails = ({
                 emailId: req.body.emailId,

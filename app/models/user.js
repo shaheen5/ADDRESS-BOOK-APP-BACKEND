@@ -40,6 +40,19 @@ const userSchema = mongoose.Schema({
     timestamps: true
 });
 
+//encrypt password using hashing before saving in database
+userSchema.pre("save", function (next) {
+    const user = this;
+
+    bcrypt.hash(this.password, 10, (err, hashedPassword) => {
+        if (err) {
+            return next(err);
+        }
+        user.password = hashedPassword;
+        next();
+    });
+});
+
 const User = mongoose.model('User', userSchema);
 
 class UserRegistrationAndLogin {
