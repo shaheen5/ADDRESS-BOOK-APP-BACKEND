@@ -26,5 +26,8 @@ module.exports = (app) => {
     app.post('/addressbook/addContact', addressBook.createNewContact);
 
     //get all contacts in addressbook
-    app.get('/addressbook/getContacts',addressBook.getAllContacts);
+    app.get('/addressbook/getContacts', addressBook.getAllContacts);
+
+    //get one contact by id
+    app.get('/addressbook/getContact/:contactId', addressBook.findContactById);
 }

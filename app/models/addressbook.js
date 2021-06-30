@@ -101,5 +101,19 @@ class AddressBookOperations {
             return callback(error, null);
         }
     }
+    /**
+       * @description retrive the addressbook Data from MongoDB
+       * @param contactId, callback is data sent from Services layer
+       * @return callback is used to callback Services with data or error message
+       */
+    findContactById = (contactId, callback) => {
+        try {
+            AddressBook.findById(contactId, (error, contactData) => {
+                return (error) ? callback(error, null) : callback(null, contactData);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
 }
 module.exports = new AddressBookOperations();

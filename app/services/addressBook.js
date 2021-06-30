@@ -44,5 +44,21 @@ class AddressBookService {
             return callback(error, null);
         }
     };
+
+    /**
+   * find a single employee with a employeeId
+   * @param {*} employeeId path to the employee object
+   * @param {*} callback callback function
+   * @returns callback, object
+   */
+    findContactById = (contactId, callback) => {
+        try {
+            addressBookModel.findContactById(contactId, (error, addressBookData) => {
+                return (error) ? callback(error, null) : callback(null, addressBookData);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
 }
 module.exports = new AddressBookService();

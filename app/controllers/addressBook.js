@@ -89,6 +89,44 @@ class AddressBookController {
             });
         }
     };
+    /**
+ * function to call the findContactById function of service that gets the required addressbook data from db
+ * @param {*} req (express property)
+ * @param {*} res (express property)
+ * @returns HTTP status and employee object
+ */
+    findContactById = (req, res) => {
+        try {
+            addressBookService.findContactById(req.params.contactId, (error, resultData) => {
+                if (error) {
+                    if (error.kind === 'ObjectId') {
+                        return res.status(404).send({
+                            success: false,
+                            message: "Contact not found with id " + req.params.contactId
+                        });
+                    }
+                    return res.status(500).send({
+                        success: false,
+                        message: "Error retrieving contact with id " + req.params.contactId
+                    });
+                }
+                if (resultData) {
+                    res.status(200).send({
+                        success: true,
+                        data: resultData,
+                        message: "Found Contact Details successfully!"
+                    });
+                } else {
+                    res.send(404).send({
+                        succes: false,
+                        message: "Data is not available for given id"
+                    });
+                }
 
+            });
+        } catch (error) {
+            return res.send({ message: error.message });
+        }
+    };
 }
 module.exports = new AddressBookController();
