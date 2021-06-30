@@ -14,6 +14,7 @@
  * @since       : 29-06-2021
  **********************************************************************************************************/
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
     firstName: {
@@ -44,7 +45,7 @@ const userSchema = mongoose.Schema({
 userSchema.pre("save", function (next) {
     const user = this;
 
-    bcrypt.hash(this.password, 10, (err, hashedPassword) => {
+    bcrypt.hash(this.password, 10 , (err, hashedPassword) => {
         if (err) {
             return next(err);
         }
