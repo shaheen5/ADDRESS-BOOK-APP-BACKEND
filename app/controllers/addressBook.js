@@ -14,6 +14,7 @@
  * @since       : 29-06-2021
  **********************************************************************************************************/
 const addressBookService = require('../services/addressBook');
+const addressbookValidator = require('../middlewares/addressBookValidation');
 
 class AddressBookController {
     /**
@@ -29,7 +30,14 @@ class AddressBookController {
             if (Object.keys(req.body).length != 8) {
                 return res.status(400).send({ success: false, message: "Invalid Input!" });
             }
-
+            //validate req body 
+            let validationResult = addressbookValidator.validate(req.body);
+            if (validationResult.error) {
+                return res.status(400).send({
+                    success: false,
+                    message: validationResult.error.details[0].message
+                });
+            }
             addressBookService.addNewContact(req.body, (error, resultData) => {
                 if (error) {
                     return res.status(500).send({
