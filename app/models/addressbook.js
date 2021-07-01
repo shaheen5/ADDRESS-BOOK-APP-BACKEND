@@ -122,9 +122,9 @@ class AddressBookOperations {
         */
     removeContactById = (contactId, callback) => {
         try {
-            AddressBook.findOneAndDelete(contactId, (error, message) => {
+            AddressBook.findByIdAndRemove(contactId, (error, message) => {
                 if (error) return callback(error, { "message": error.message });
-                else return callback(null, { "message": "Contact was deleted successfully" });
+                else return callback(null,"{Contact was deleted successfully}");
             });
         } catch (error) {
             return callback(error, "Some error occurred!");

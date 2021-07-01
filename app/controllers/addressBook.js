@@ -79,7 +79,7 @@ class AddressBookController {
                 res.status(200).send({
                     success: true,
                     data: contacts,
-                    message: "Successfully Retrieved All contacts !"
+                    message: "Successfully Retrieved All Contacts !"
                 });
             });
         } catch (error) {
@@ -117,12 +117,11 @@ class AddressBookController {
                         message: "Found Contact Details successfully!"
                     });
                 } else {
-                    res.send(404).send({
+                    res.status(404).send({
                         succes: false,
                         message: "Data is not available for given id"
                     });
                 }
-
             });
         } catch (error) {
             return res.send({ message: error.message });
@@ -137,7 +136,7 @@ class AddressBookController {
     */
     removeContactFromAddressbook = (req, res) => {
         try {
-            addressBookService.removecontactById(req.params.contactId, (error, message) => {
+            addressBookService.removecontactById(req.params.contactId, (error, result) => {
                 if (error) {
                     return res.status(500).send({
                         success: false,
@@ -146,7 +145,7 @@ class AddressBookController {
                 }
                 res.status(200).send({
                     success: true,
-                    message: message
+                    message: result
                 });
             });
         } catch (error) {
