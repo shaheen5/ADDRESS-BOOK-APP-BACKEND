@@ -50,3 +50,4 @@ app.listen(process.env.PORT,()=>{
     logger.info(`Server is running at localhost : ${process.env.PORT}`);
     console.log(`Server is listening at port ${process.env.PORT}`);
 });
+module.exports = app; // for testing

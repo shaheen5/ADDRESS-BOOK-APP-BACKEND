@@ -1,0 +1,84 @@
+{
+    "registerUserData": {
+        "firstName": "virat",
+        "lastName": "kohli",
+        "emailId": "virat007@gmail.com",
+        "password": "virat@123"
+    },
+    "registerUserDataWithFirstNameLessThan3Characters": {
+        "firstName": "v",
+        "lastName": "kohli",
+        "emailId": "virat007@gmail.com",
+        "password": "virat@123"
+    },
+    "addContactData": {
+        "firstName": "Taylor",
+        "lastName": "Swift",
+        "address": "South Street Corner",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "zipCode": "201111",
+        "phoneNumber": "9922123990",
+        "emailId": "taylor@gmail.com"
+    },
+    "addContactDataWithIncorrectFirstName": {
+        "firstName": "S",
+        "lastName": "Miya",
+        "address": "ABC Colony",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "zipCode": "201111",
+        "phoneNumber": "9922123990",
+        "emailId": "shaheen5@gmail.com"
+    },
+    "addContactDataWithoutName": {
+        "emailId": "virat007@gmail.com",
+        "password": "virat@123"
+    },
+    "loginData": {
+        "emailId": "afrin@gmail.com",
+        "password": "shaikh@123"
+    },
+    "loginDataWithIncorrectEmailID": {
+        "emailId": "abc@gmail.com",
+        "password": "pqr@123"
+    },
+    "deletePersonId": {
+        "id": "60dd95fcba252613a4ca2ecf"
+    },
+    "deleteIncorrectId": {
+        "id": "1abcdef12345"
+    },
+    "updateContactDetails": {
+        "firstName": "Shaheen",
+        "lastName": "Miya",
+        "address": "Sr No:67/1B/9 Gokul Nagar",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "zipCode": "201001",
+        "phoneNumber": "9922123998",
+        "emailId": "shaheen5@gmail.com"
+    },
+    "updateContactDetailsWithWrongId": {
+        "firstName": "Shaheen",
+        "lastName": "Miya",
+        "address": "Sr No:67/1B/9 Shanti Nagar",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "zipCode": "201111",
+        "phoneNumber": "9922123990",
+        "emailId": "shaheen5@gmail.com"
+    },
+    "updateContactId": {
+        "id": "60dd4679cf85e2405c282000"
+    },
+    "updateContactWrongId": {
+        "id": "60cc23243c"
+    },
+    "getContactDetailsId": {
+        "id": "60dd4679cf85e2405c282000"
+    },
+    "getContactDetailsWrongId": {
+        "id": "abc123"
+    }
+}
