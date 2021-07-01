@@ -76,5 +76,20 @@ class AddressBookService {
             return callback(error, null);
         }
     }
+    /**
+     * Updating employee data
+     * @param {*} contactId id object
+     * @param {*} addressBookData data object
+     * @param {*} callback function
+     */
+    updateContactDetails = (contactId, addressBookData, callback) => {
+        try {
+            addressBookModel.updateContactById(contactId, addressBookData, (error, data) => {
+                return (error) ? callback(error, null) : callback(null, data);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    };
 }
 module.exports = new AddressBookService();

@@ -33,4 +33,7 @@ module.exports = (app) => {
 
     //delete contact by id
     app.delete('/addressbook/deleteContact/:contactId', addressBook.removeContactFromAddressbook);
+
+    //update contact details in addressbook
+    app.put('/addressbook/updateContact/:contactId',addressBook.updateContactDetails);
 }

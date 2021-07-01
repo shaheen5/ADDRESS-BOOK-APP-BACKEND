@@ -155,5 +155,43 @@ class AddressBookController {
             });
         }
     };
+     /**
+   * function to call the update function that updates the required addressbook data from db
+   * @param {*} req (express property)
+   * @param {*} res (express property)
+   * @returns HTTP status and object
+   */
+      updateContactDetails = (req, res) => {
+        try {
+             //check whether request body contains 8 input properties
+             if (Object.keys(req.body).length != 8) {
+                return res.status(400).send({ success: false, message: "Invalid Input!" });
+            }
+            addressBookService.updateContactDetails(req.params.contactId, req.body, (error, resultData) => {
+                if (error) {
+                    if (error.kind === 'ObjectId') {
+                        return res.status(404).send({
+                            message: "Contact not found with id " + req.params.contactId
+                        });
+                    }
+                    return res.status(500).send({
+                        message: "Error updating contact with id " + req.params.contactId
+                    });
+                }
+                res.send({
+                    success: true,
+                    message: "Contact Details Updated Successfully!",
+                    data: resultData
+                });
+            });
+
+        } catch (error) {
+            return res.send({
+                success: false,
+                message: error.message
+            });
+        }
+    };
+
 }
 module.exports = new AddressBookController();

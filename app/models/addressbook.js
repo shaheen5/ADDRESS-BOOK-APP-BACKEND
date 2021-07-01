@@ -130,5 +130,29 @@ class AddressBookOperations {
             return callback(error, "Some error occurred!");
         }
     }
+    /**
+      * @description Update the employee Data by Id
+      * @param contactId, addressBookData and callback
+      * @return callback is used to callback Services with data or error message
+      */
+    updateContactById = (contactId, addressBookData, callback) => {
+        try {
+            //find employee by id and update it with the request body
+            AddressBook.findByIdAndUpdate(contactId, {
+                firstName: addressBookData.firstName,
+                lastName: addressBookData.lastName,
+                address: addressBookData.address,
+                city: addressBookData.city,
+                state: addressBookData.state,
+                zipCode: addressBookData.zipCode,
+                phoneNumber: addressBookData.phoneNumber,
+                emailId: addressBookData.emailId
+            }, { new: true }, (error, data) => {
+                return (error) ? callback(error, null) : callback(null, data);
+            });
+        } catch (error) {
+            return callback(error, null);
+        }
+    }
 }
 module.exports = new AddressBookOperations();
