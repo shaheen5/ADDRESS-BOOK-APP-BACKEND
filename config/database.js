@@ -15,6 +15,7 @@
  **********************************************************************************************************/
 const mongoose = require('mongoose');
 require('dotenv').config();
+const {logger} = require('./logger');
 
 module.exports = () => {
     // Connecting to the database
@@ -23,8 +24,10 @@ module.exports = () => {
         useUnifiedTopology: true,
         useCreateIndex: true
     }).then(() => {
+        logger.info("Successfully Connected to the database!");
         console.log("Successfully connected to the database");
     }).catch(err => {
+        logger.error('Problem connecting to database !');
         console.log('Could not connect to the database. Exiting now...', err);
         process.exit();
     });

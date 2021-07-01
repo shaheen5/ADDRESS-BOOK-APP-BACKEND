@@ -31,6 +31,9 @@ app.use(express.urlencoded({extended:true}))
 // parse requests of content-type - application/json
 app.use(express.json());
 
+//configure the logger
+const {logger} = require('./config/logger'); 
+
 // Configuring the database
 const dbConnect = require('./config/database');
 dbConnect();
@@ -44,5 +47,6 @@ app.get('/',(req,res)=>{
 });
 
 app.listen(process.env.PORT,()=>{
+    logger.info(`Server is running at localhost : ${process.env.PORT}`);
     console.log(`Server is listening at port ${process.env.PORT}`);
 });
