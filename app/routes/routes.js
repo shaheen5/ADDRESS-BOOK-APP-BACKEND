@@ -15,6 +15,8 @@
  **********************************************************************************************************/
 const user = require('../controllers/user');
 const addressBook = require('../controllers/addressBook');
+const helper = require('../middlewares/helper');
+
 module.exports = (app) => {
     // Create a new user
     app.post('/registerUser', user.registerUser);
@@ -23,17 +25,17 @@ module.exports = (app) => {
     app.post('/login', user.userLogin);
 
     //add new contact in addressbook
-    app.post('/addressbook/addContact', addressBook.createNewContact);
+    app.post('/addressbook/addContact', helper.authenticateToken, addressBook.createNewContact);
 
     //get all contacts in addressbook
-    app.get('/addressbook/getContacts', addressBook.getAllContacts);
+    app.get('/addressbook/getContacts', helper.authenticateToken, addressBook.getAllContacts);
 
     //get one contact by id
-    app.get('/addressbook/getContact/:contactId', addressBook.findContactById);
+    app.get('/addressbook/getContact/:contactId', helper.authenticateToken, addressBook.findContactById);
 
     //delete contact by id
-    app.delete('/addressbook/deleteContact/:contactId', addressBook.removeContactFromAddressbook);
+    app.delete('/addressbook/deleteContact/:contactId', helper.authenticateToken, addressBook.removeContactFromAddressbook);
 
     //update contact details in addressbook
-    app.put('/addressbook/updateContact/:contactId',addressBook.updateContactDetails);
+    app.put('/addressbook/updateContact/:contactId', helper.authenticateToken, addressBook.updateContactDetails);
 }

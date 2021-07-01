@@ -46,7 +46,8 @@ class UserService {
                     return callback(err, null);
                 }
                 if (helper.checkPassword(loginDetails.password, data.password)) {
-                    return callback(null, data);
+                    const userToken = helper.getGeneratedToken(loginDetails);
+                    return userToken ? callback(null, userToken) : callback("Error Generating Token", null);
                 }
                 return callback("Pasword is incorrect", null);
             });
