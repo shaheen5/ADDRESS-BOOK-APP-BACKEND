@@ -120,3 +120,5 @@
 {"message":"Successfully Connected to the database!","level":"info","timestamp":"2021-07-01T19:18:01.161Z"}
 {"message":"Server is running at localhost : 3000","level":"info","timestamp":"2021-07-01T19:20:52.024Z"}
 {"message":"Successfully Connected to the database!","level":"info","timestamp":"2021-07-01T19:20:52.339Z"}
+{"message":"Server is running at localhost : 3000","level":"info","timestamp":"2021-07-01T19:22:05.588Z"}
+{"message":"Successfully Connected to the database!","level":"info","timestamp":"2021-07-01T19:22:06.880Z"}
