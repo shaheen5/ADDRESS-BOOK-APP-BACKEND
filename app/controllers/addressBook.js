@@ -154,17 +154,25 @@ class AddressBookController {
             });
         }
     };
-     /**
-   * function to call the update function that updates the required addressbook data from db
-   * @param {*} req (express property)
-   * @param {*} res (express property)
-   * @returns HTTP status and object
-   */
-      updateContactDetails = (req, res) => {
+    /**
+  * function to call the update function that updates the required addressbook data from db
+  * @param {*} req (express property)
+  * @param {*} res (express property)
+  * @returns HTTP status and object
+  */
+    updateContactDetails = (req, res) => {
         try {
-             //check whether request body contains 8 input properties
-             if (Object.keys(req.body).length != 8) {
+            //check whether request body contains 8 input properties
+            if (Object.keys(req.body).length != 8) {
                 return res.status(400).send({ success: false, message: "Invalid Input!" });
+            }
+            //validate req body 
+            let validationResult = addressbookValidator.validate(req.body);
+            if (validationResult.error) {
+                return res.status(400).send({
+                    success: false,
+                    message: validationResult.error.details[0].message
+                });
             }
             addressBookService.updateContactDetails(req.params.contactId, req.body, (error, resultData) => {
                 if (error) {
@@ -191,6 +199,5 @@ class AddressBookController {
             });
         }
     };
-
 }
 module.exports = new AddressBookController();

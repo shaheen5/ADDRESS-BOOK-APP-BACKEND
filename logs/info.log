@@ -122,3 +122,7 @@
 {"message":"Successfully Connected to the database!","level":"info","timestamp":"2021-07-01T19:20:52.339Z"}
 {"message":"Server is running at localhost : 3000","level":"info","timestamp":"2021-07-01T19:22:05.588Z"}
 {"message":"Successfully Connected to the database!","level":"info","timestamp":"2021-07-01T19:22:06.880Z"}
+{"message":"Server is running at localhost : 3000","level":"info","timestamp":"2021-07-01T20:09:41.520Z"}
+{"message":"Successfully Connected to the database!","level":"info","timestamp":"2021-07-01T20:09:41.757Z"}
+{"message":"Server is running at localhost : 3000","level":"info","timestamp":"2021-07-02T06:58:45.095Z"}
+{"message":"Successfully Connected to the database!","level":"info","timestamp":"2021-07-02T06:58:46.215Z"}
