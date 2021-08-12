@@ -15,6 +15,7 @@
  **********************************************************************************************************/
 const userModel = require('../models/user');
 const helper = require('../middlewares/helper');
+const { logger } = require('../../config/logger');
 
 class UserService {
 
@@ -27,9 +28,16 @@ class UserService {
     registerUser = (userData, callback) => {
         try {
             userModel.addNewUser(userData, (error, data) => {
-                return (error) ? callback(error, null) : callback(null, data);
+                if (error) {
+                    logger.error(error.message);
+                    return callback(error, null)
+                }else {
+                    logger.info(data);
+                    return callback(null, data);
+                }
             });
         } catch (error) {
+            logger.error(error.message);
             return callback(error, null);
         }
     }
@@ -41,8 +49,9 @@ class UserService {
       */
     userLogin = (loginDetails, callback) => {
         try {
-            userModel.userLogin(loginDetails, (err, data) => {
+             userModel.userLogin(loginDetails, (err, data) => {
                 if (err) {
+                    logger.error(err.message);
                     return callback(err, null);
                 }
                 if (helper.checkPassword(loginDetails.password, data.password)) {
@@ -52,6 +61,7 @@ class UserService {
                 return callback("Pasword is incorrect", null);
             });
         } catch (error) {
+            logger.error(error.message);
             return callback(error, null);
         }
     }

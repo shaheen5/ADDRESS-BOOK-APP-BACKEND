@@ -14,6 +14,7 @@
  * @since       : 29-06-2021
  **********************************************************************************************************/
 const addressBookModel = require('../models/addressbook');
+const { logger } = require('../../config/logger');
 
 class AddressBookService {
     /**
@@ -25,23 +26,31 @@ class AddressBookService {
     addNewContact = (addressBookData, callback) => {
         try {
             addressBookModel.addNewContactInBook(addressBookData, (error, data) => {
-                return (error) ? callback(error, null) : callback(null, data);
+                if (error) {
+                    logger.error(error.message);
+                    callback(error, null);
+                }
+                else {
+                    logger.info(data);
+                    callback(null, data);
+                }
             });
         } catch (error) {
+            logger.error(error.message);
             return callback(error, null);
         }
     }
     /**
   * /retrieve and return all contacts from the database.
-  * @param {*} callback callback function
+  * @param {*} object
   */
-    findAllContacts = (callback) => {
+    async findAllContacts() {
         try {
-            addressBookModel.findAllContacts((error, addressBookData) => {
-                return (error) ? callback(error, null) : callback(null, addressBookData);
-            });
+            const allContacts = await addressBookModel.findAllContacts();
+            return allContacts;
         } catch (error) {
-            return callback(error, null);
+            logger.error(error.message);
+            return error;
         }
     };
 
@@ -49,15 +58,24 @@ class AddressBookService {
    * find a single employee with a contactId
    * @param {*} contactId path to the employee object
    * @param {*} callback callback function
-   * @returns callback, object
+   * @returns promise, object
    */
-    findContactById = (contactId, callback) => {
+    findContactById = (contactId) => {
         try {
-            addressBookModel.findContactById(contactId, (error, addressBookData) => {
-                return (error) ? callback(error, null) : callback(null, addressBookData);
-            });
+            return addressBookModel.findContactById(contactId)
+                .then(addressBookData => {
+                    if (!addressBookData) {
+                        return "Data not found!";
+                    } else {
+                        logger.info(addressBookData);
+                        return addressBookData;
+                    }
+                }).catch(error => {
+                    logger.error(error.message);
+                    return "Some error occured while retrieving contact"
+                });
         } catch (error) {
-            return callback(error, null);
+            return error.message;
         }
     }
     /**
@@ -69,8 +87,14 @@ class AddressBookService {
     removecontactById = (contactId, callback) => {
         try {
             addressBookModel.removeContactById(contactId, (error, message) => {
-                if (error) return callback(error, { "message": "Contact could not be deleted" });
-                else return callback(null, { "message": "Contact was deleted successfully" });
+                if (error) {
+                    logger.error(error.message);
+                    return callback(error, { "message": "Contact could not be deleted" });
+                }
+                else {
+                    logger.info("Contact Deleted with contact id->", contactId);
+                    return callback(null, { "message": "Contact was deleted successfully" });
+                }
             });
         } catch (error) {
             return callback(error, null);
@@ -85,9 +109,16 @@ class AddressBookService {
     updateContactDetails = (contactId, addressBookData, callback) => {
         try {
             addressBookModel.updateContactById(contactId, addressBookData, (error, data) => {
-                return (error) ? callback(error, null) : callback(null, data);
+                if (error) {
+                    logger.error(error.message);
+                    return callback(error, null);
+                } else {
+                    logger.info(data);
+                    return callback(null, data);
+                }
             });
         } catch (error) {
+            logger.error(error.message);
             return callback(error, null);
         }
     };

@@ -92,27 +92,33 @@ class AddressBookOperations {
         * @param callback is data sent from Service layer
         * @return callback is used to callback Services with data or error message
         */
-    findAllContacts = (callback) => {
+    async findAllContacts() {
         try {
-            AddressBook.find((error, addressBookData) => {
-                return (error) ? callback(error, null) : callback(null, addressBookData);
-            });
+             const allContacts= await AddressBook.find();
+             return allContacts;
         } catch (error) {
-            return callback(error, null);
+            return error;
         }
     }
     /**
        * @description retrive the addressbook Data from MongoDB
        * @param contactId, callback is data sent from Services layer
-       * @return callback is used to callback Services with data or error message
+       * @return promise is used to return appropriate response to service layer
        */
-    findContactById = (contactId, callback) => {
+    findContactById = (contactId) => {
         try {
-            AddressBook.findById(contactId, (error, contactData) => {
-                return (error) ? callback(error, null) : callback(null, contactData);
+            return AddressBook.findById(contactId)
+            .then((contactData) => {
+                if(!contactData) {
+                    return "Contact Does Not Exist!"
+                }else{
+                    return contactData;
+                }       
+            }).catch(error=>{
+                return error;
             });
         } catch (error) {
-            return callback(error, null);
+            return error;
         }
     }
     /**
@@ -124,7 +130,7 @@ class AddressBookOperations {
         try {
             AddressBook.findByIdAndRemove(contactId, (error, message) => {
                 if (error) return callback(error, { "message": error.message });
-                else return callback(null,"{Contact was deleted successfully}");
+                else return callback(null,"Contact was deleted successfully");
             });
         } catch (error) {
             return callback(error, "Some error occurred!");
